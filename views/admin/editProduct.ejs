@@ -1,0 +1,88 @@
+<%- include ('adminHeader')%>
+
+
+<section class="content-main">
+    <form action="/admin/editproduct" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-9">
+                <div class="content-header">
+                    <h2 class="content-title">Edit Product</h2>
+                    <div>
+                        <button type="submit" class="btn btn-md rounded font-sm hover-up">Edit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <label for="product_title" class="form-label">Product title</label>
+                            <input name="name" type="text" value="<%- products.name %>" placeholder="Type here" class="form-control" id="product_title">
+                        </div>
+                        <div class="row gx-3">
+                            
+                           
+                            <div class="col-md-4 mb-3">
+                                <label for="product_size" class="form-label">Quantity</label>
+                                <input type="text" value="<%- products.quantity %>" name="quantity" placeholder="Type here" class="form-control" id="product_size">
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="product_brand" class="form-label">Brand</label>
+                            <input type="text" value="<%- products.brand %>" name="brand" placeholder="Type here" class="form-control" id="product_brand">
+                        </div>
+                        <input type="hidden" name="id" value="<%- products._id %>">
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div>
+                            <label class="form-label">Description</label>
+                            <textarea name="description" placeholder="Type here" class="form-control" rows="4"><%-products.description%></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="card mb-4">
+                    <div class="card-body">
+                        <div>
+                            <label class="form-label">Cover Images</label>
+                            <input type="file"  accept="image/*" id="images" name="coverimage" multiple>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <label class="form-label">Images</label>
+                            <input name="images" class="form-control" type="file" multiple required>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+      
+
+
+                                <div class="col-lg-3">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <div class="mb-4">
+                                                <label class="form-label" for="product_price">Price</label>
+                                                <input type="text" value="<%- products.price %>" name="price" placeholder="Type here" class="form-control" id="product_price">
+
+                                                
+
+                                            </div>
+
+
+                                            <div class="mb-4">
+                                                <label class="form-label" for="product_status">Category</label>
+                                                <select class="form-select" name="category" id="product_status">
+                                                    <% cata.forEach(element => { %>
+                                                        <option value="<%= element.name %>"><%= element.name %></option>
+                                                    <% }) %>
+                                                </select>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                      
+    <%- include ('adminFooter')%>   
