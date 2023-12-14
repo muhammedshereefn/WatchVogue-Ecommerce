@@ -1,0 +1,427 @@
+﻿<%- include('userSubHeader') %>
+
+   <% if (cart) { %>
+    <% if (cart.items.length > 0) { %>
+      <main class="main">
+        
+        <section class="mt-50 mb-50">
+
+           <% if (cart) { %>
+            <div class="container">
+              <div class="row">
+                  <div class="col-12">
+                      <div class="table-responsive">
+                          
+
+
+                          <!-- <table class="table shopping-summery text-center clean">
+                              <thead>
+                                  <tr class="main-heading">
+                                      <th></th>
+                                      <th scope="col">Image</th>
+                                      <th scope="col">Name</th>
+                                      <th scope="col">Price</th>
+                                      <th scope="col">Quantity</th>
+                                      <th scope="col">Subtotal</th>
+                                      <th scope="col">Remove</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  
+                                      
+                                 
+                                      <tr>
+                                          <td colspan="7" class="text-center">Cart is empty</td>
+                                      </tr>
+                                
+                                  <tr>
+                                      <td colspan="6" class="text-end">
+                                          <a href="/dltAllItem" class="text-muted"><i class="fi-rs-cross-small"></i> Clear Cart</a>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table> -->
+
+
+                          <table class="table shopping-summery text-center clean">
+                            <thead>
+                                <tr class="main-heading">
+                                    <th></th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Subtotal</th>
+                                    <th scope="col">Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% if (cart.items.length > 0) { %>
+                                    <% cart.items.forEach(products => { %>
+                                        <tr>
+                                            <td></td>
+                                            <td><img src="<%=products.product.coverimage %>" alt="<%=products.product.name %>"></td>
+                                            <td><%=products.product.name %></td>
+                                            <td><%=products.product.offerPrice %></td>
+                        
+                                            <!-- Check if the cart quantity is greater than stock quantity -->
+                                            <% if (products.quantity > products.product.stockQuantity) { %>
+                                                <td class="text-danger">Stock Limit Exceeded</td>
+                                            <% } else { %>
+                                               
+                        
+                                                <td class="align-middle">
+                                                    <div class="input-group quantity-control d-flex justify-content-center">
+                                                        <a href="/updateQuantityDec/<%= products.product._id %>">
+                                                            <button class="btn btn-outline-secondary bg-dark" type="button" id="cartDecrease" onclick="updateQuantity('<%=products.product._id %>', -1)">-</button>
+                                                        </a>
+                                                        <span class="input-group-text quantity-value"><%=products.quantity %></span>
+                                                        <a href="/updateQuantity/<%= products.product._id %>">
+                                                            <button class="btn btn-outline-secondary bg-dark" type="button" id="cartIncrease" onclick="updateQuantity('<%=products.product._id %>', 1)">+</button>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            <% } %>
+                        
+                                            <td><%=products.product.offerPrice * products.quantity %></td>
+                                            <td>
+                                              <button class="btn btn-danger remove-btn rounded bg-dark" onclick="removeItem('<%=products.product._id %>')">Remove</button>
+                                          </td>
+                                        </tr>
+                                    <% }) %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="7" class="text-center">Cart is empty</td>
+                                    </tr>
+                                <% } %>
+                                <tr>
+                                    <td colspan="6" class="text-end">
+                                      
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                          
+                          
+
+
+
+
+
+                      </div>
+                      <% if (cart) { %>
+                        <div class="cart-action text-end">
+                          
+                          <a href="/home" class="btn bg-dark "><i class="fi-rs-shopping-bag mr-10" ></i>Continue Shopping</a>
+                      </div>
+                      <% } %>
+                      <div class="divider center_icon mt-50 mb-50"><i class=""></i></div>
+                      <div class="row mb-50">
+                       
+                          <div class="col-lg-6 col-md-12">
+                              <div class="border p-md-4 p-30 border-radius cart-totals">
+                                  <div class="heading_s1 mb-3">
+                                      <h4><span style="color: #e44d26;">C</span>ART TOTAL</h4>
+                                  </div>
+                                  <div class="table-responsive">
+                                      <table class="table">
+                                          <tbody>
+                                              <tr>
+                                                  <td class="cart_total_label">Cart Subtotal</td>
+                                                  <td class="cart_total_amount">
+                                                    <% total = 0; %>
+                                                    <% cart.items.forEach(products =>{ %>
+                                                    <% total += products.product.offerPrice * products.quantity %>
+                                                    <% }) %>
+                                                    <span class="font-lg fw-900 text-brand">₹<%= total  %></span>
+                                                  </td>
+                                              </tr>
+                                              <tr>
+                                                  <td class="cart_total_label">Shipping</td>
+                                                  <td class="cart_total_amount"> <i class="ti-gift mr-5"></i> Free Shipping</td>
+                                              </tr>
+                                              <tr>
+                                                  <td class="cart_total_label">Total</td>
+                                                  <td class="cart_total_amount"><strong>
+
+                                                    <% total = 0; %>
+                                                    <% cart.items.forEach(products =>{ %>
+                                                    <% total += products.product.offerPrice * products.quantity %>
+                                                    <% }) %>
+
+
+                                                    <span class="font-xl fw-900 text-brand text-dark">₹<%= total  %></span>
+                                                  </strong></td>
+                                              </tr>
+                                          </tbody>
+                                      </table>
+                                  </div>
+                                  <a href="/checkout" class="btn bg-dark"> <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <% } else { %>
+           <div class="container d-flex justify-content-center align-items-center"
+           style="height: 300px; width: 100%;">
+           <div style="text-align: center;"><p class="mb-2"> CART IS EMPTY</p> <br><a class="btn btn-sucess" href="/homeProduct">Continue Shopping</a></div>
+           </div>
+           <% } %>
+
+        </section>
+    </main>
+    <% } else { %>
+      <div class="container d-flex justify-content-center align-items-center"
+      style="height: 300px; width: 100%;">
+      <div style="text-align: center;"><p class="mb-2"> CART IS EMPTY</p> <br><a class="btn btn-sucess" href="/homeProduct">Continue Shopping</a></div>
+      </div>
+    <% } %>
+    <% } else { %>
+     <div class="container d-flex justify-content-center align-items-center"
+           style="height: 300px; width: 100%;">
+           <div style="text-align: center;"><p class="mb-2"> CART IS EMPTY</p> <br><a class="btn btn-sucess" href="/homeProduct">Continue Shopping</a></div>
+           </div>
+   <% } %>
+
+    <footer class="main">
+      <section class="newsletter p-30 text-white wow fadeIn animated bg-dark">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 mb-md-3 mb-lg-0">
+                    <div class="row align-items-center">
+                       
+                      
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <!-- Subscribe Form -->
+                    
+                    <!-- End Subscribe Form -->
+                </div>
+            </div>
+        </div>
+    </section>
+        <section class="section-padding footer-mid">
+          <div class="container pt-15 pb-20">
+            <div class="row">
+              <div class="col-lg-4 col-md-6">
+                <div class="widget-about font-md mb-md-5 mb-lg-0">
+                  <div class="logo logo-width-1 wow fadeIn animated">
+                    <h2><a href="/home">WatchVogue</a></h2>
+                  </div>
+                  <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">
+                    Contact
+                  </h5>
+                  <p class="wow fadeIn animated">
+                    <strong>Address: </strong>562 Wellington Road, Street 32, San
+                    Francisco
+                  </p>
+                  <p class="wow fadeIn animated">
+                    <strong>Phone: </strong>+01 2222 365 /(+91) 01 2345 6789
+                  </p>
+                  <p class="wow fadeIn animated">
+                    <strong>Hours: </strong>10:00 - 18:00, Mon - Sat
+                  </p>
+                  <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">
+                    Follow Us
+                  </h5>
+                  <div
+                    class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0"
+                  >
+                    <a href="#"
+                      ><img
+                        src="/user/assets/imgs/theme/icons/icon-facebook.svg"
+                        alt=""
+                    /></a>
+                    <a href="#"
+                      ><img
+                        src="/user/assets/imgs/theme/icons/icon-twitter.svg"
+                        alt=""
+                    /></a>
+                    <a href="#"
+                      ><img
+                        src="/user/assets/imgs/theme/icons/icon-instagram.svg"
+                        alt=""
+                    /></a>
+                    <a href="#"
+                      ><img
+                        src="/user/assets/imgs/theme/icons/icon-pinterest.svg"
+                        alt=""
+                    /></a>
+                    <a href="#"
+                      ><img
+                        src="/user/assets/imgs/theme/icons/icon-youtube.svg"
+                        alt=""
+                    /></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-3">
+                <h5 class="widget-title wow fadeIn animated">About</h5>
+                <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
+                  <li><a href="#">About Us</a></li>
+                  <li><a href="#">Delivery Information</a></li>
+                  <li><a href="#">Privacy Policy</a></li>
+                  <li><a href="#">Terms &amp; Conditions</a></li>
+                  <li><a href="#">Contact Us</a></li>
+                  <li><a href="#">Support Center</a></li>
+                </ul>
+              </div>
+              <div class="col-lg-2 col-md-3">
+                <h5 class="widget-title wow fadeIn animated">My Account</h5>
+                <ul class="footer-list wow fadeIn animated">
+                  <li><a href="#">Sign In</a></li>
+                  <li><a href="#">View Cart</a></li>
+                  <li><a href="#">My Wishlist</a></li>
+                  <li><a href="#">Track My Order</a></li>
+                  <li><a href="#">Help</a></li>
+                  <li><a href="#">Order</a></li>
+                </ul>
+              </div>
+              <div class="col-lg-4">
+                <h5 class="widget-title wow fadeIn animated">Install App</h5>
+                <div class="row">
+                  <div class="col-md-8 col-lg-12">
+                    <p class="wow fadeIn animated">
+                      From App Store or Google Play
+                    </p>
+                    <div class="download-app wow fadeIn animated">
+                      <a href="#" class="hover-up mb-sm-4 mb-lg-0"
+                        ><img
+                          class="active"
+                          src="/user/assets/imgs/theme/app-store.jpg"
+                          alt=""
+                      /></a>
+                      <a href="#" class="hover-up"
+                        ><img
+                          src="/user/assets/imgs/theme/google-play.jpg"
+                          alt=""
+                      /></a>
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-lg-12 mt-md-3 mt-lg-0">
+                    <p class="mb-20 wow fadeIn animated">
+                      Secured Payment Gateways
+                    </p>
+                    <img
+                      class="wow fadeIn animated"
+                      src="/user/assets/imgs/theme/payment-method.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="container pb-20 wow fadeIn animated">
+          <div class="row">
+            <div class="col-12 mb-20">
+              <div class="footer-bottom"></div>
+            </div>
+            <div class="col-lg-6">
+              <p class="float-md-left font-sm text-muted mb-0">
+                &copy; 2022, <strong class="text-brand">Evara</strong> - HTML
+                Ecommerce Template
+              </p>
+            </div>
+            <div class="col-lg-6">
+              <p class="text-lg-end text-start font-sm text-muted mb-0">
+                Designed by
+                <a href="http://alithemes.com" target="_blank">Alithemes.com</a>.
+                All rights reserved
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- Preloader Start -->
+      <!-- <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+          <div class="preloader-inner position-relative">
+            <div class="text-center">
+              <h5 class="mb-5">Now Loading</h5>
+              <div class="loader">
+                <div class="bar bar1"></div>
+                <div class="bar bar2"></div>
+                <div class="bar bar3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- Vendor JS-->
+      <script src="/user/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+      <script src="/user/assets/js/vendor/jquery-3.6.0.min.js"></script>
+      <script src="/user/assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+      <script src="/user/assets/js/vendor/bootstrap.bundle.min.js"></script>
+      <script src="/user/assets/js/plugins/slick.js"></script>
+      <script src="/user/assets/js/plugins/jquery.syotimer.min.js"></script>
+      <script src="/user/assets/js/plugins/wow.js"></script>
+      <script src="/user/assets/js/plugins/jquery-ui.js"></script>
+      <script src="/user/assets/js/plugins/perfect-scrollbar.js"></script>
+      <script src="/user/assets/js/plugins/magnific-popup.js"></script>
+      <script src="/user/assets/js/plugins/select2.min.js"></script>
+      <script src="/user/assets/js/plugins/waypoints.js"></script>
+      <script src="/user/assets/js/plugins/counterup.js"></script>
+      <script src="/user/assets/js/plugins/jquery.countdown.min.js"></script>
+      <script src="/user/assets/js/plugins/images-loaded.js"></script>
+      <script src="/user/assets/js/plugins/isotope.js"></script>
+      <script src="/user/assets/js/plugins/scrollup.js"></script>
+      <script src="/user/assets/js/plugins/jquery.vticker-min.js"></script>
+      <script src="/user/assets/js/plugins/jquery.theia.sticky.js"></script>
+      <!-- Template  JS -->
+      <script src="./user/assets/js/main.js?v=3.4"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+      <script>
+        async function removeItem(productId) {
+            const id = productId;
+    
+            try {
+                const result = await Swal.fire({
+                    title: 'Remove From Cart',
+                    text: 'Are you sure you want to remove this product from cart?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, cancel it!'
+                });
+    
+                if (result.isConfirmed) {
+                    const response = await fetch('/removeItem', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ id })
+                    });
+    
+                    if (response.ok) {
+                        // The item was successfully removed, you can reload the page or take other actions
+                        location.reload(); // Reload the page
+                    } else {
+                        // Handle the error, log it, or show an alert to the user
+                        console.error('Error:', response.statusText);
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
+    
+
+
+
+
+
+
+    </body>
+    </html>
+    
+    

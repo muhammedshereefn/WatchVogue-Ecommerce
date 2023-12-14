@@ -1,90 +1,229 @@
 ﻿<%- include('userHeader') %>
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
+<style>
+    .featured img {
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
+
+    .featured img:hover {
+        transform: translateY(-10px); /* Move the image 10 pixels upwards */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adjust shadow properties as needed */
+        opacity: 0.8; /* Adjust the opacity value */
+    }
+</style>
+<style>
+    .newsletter {
+        position: relative;
+        background-color: #333;
+        color: white;
+    }
+
+    .video-container {
+        width: 100%;
+        height: 90px; /* Set the desired height */
+        overflow: hidden;
+    }
+
+    video {
+        width: 100%;
+        height: 100%; /* Ensure the video fills the container */
+        object-fit: cover; /* Maintain aspect ratio and cover the container */
+    }
+
+    .content-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .subscribe-form {
+        display: flex;
+        align-items: center;
+    }
+
+    .watch-icon {
+        width: 40px; /* Adjust the size as needed */
+        height: 40px; /* Adjust the size as needed */
+        margin-right: 10px;
+        animation: rotateWatch 2s infinite linear;
+    }
+
+    @keyframes rotateWatch {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        background-color: transparent;
+        color: #fff;
+        transition: border-color 0.3s ease-in-out;
+    }
+
+    .form-control:focus {
+        border-color: #ffcc00;
+        outline: none;
+    }
+
+    .subscribe-btn {
+        background-color: #ffcc00;
+        color: #333;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    .subscribe-btn:hover {
+        background-color: #ffd633;
+        transform: scale(1.1);
+    }
+</style>
+
+<style>
+    .product-cart-wrap {
+        border: 1px solid #000; /* Add a border if needed */
+        /* Remove border-radius to have sharp edges */
+        border-radius: 0;
+    }
+</style>
+
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <main class="main">       
-        <section class="home-slider position-relative pt-50">
-            <div class="hero-slider-1 dot-style-1 dot-style-1-position-1">
-                <div class="single-hero-slider single-animation-wrap">
-                    <div class="container">
-                        <div class="row align-items-center slider-animated-1">
-                            <div class="col-lg-5 col-md-6">
-                                <div class="hero-slider-content-2">
-                                    <h4 class="animated">Trade-in offer</h4>
-                                    <h2 class="animated fw-900">Discover Our</h2>
-                                    <h1 class="animated fw-900 text-brand">Exquisite Watch Collection</h1>
-                                    <p class="animated">Save more with coupons & up to 70% off</p>
-                                    <a class="animated btn btn-brush btn-brush-3" href="shop-product-right.html"> Shop Now </a>
+      <section class="home-slider position-relative pt-15 bg-light">
+    <div class="hero-slider-1 dot-style-1 dot-style-1-position-1">
+        <div class="single-hero-slider single-animation-wrap">
+            <div class="container-fluid">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="swiper-slide">
+                            <a href="/homeProduct">
+                                <div class="row align-items-center slider-animated-1">
+                                    <div class="col-lg-12">
+                                        <div class="single-slider-img single-slider-img-1" style="width: 1325px; height: 400px;">
+                                            <img class="animated slider-1-1 w-100" src="/user/assets/imgs/banner/pc_2160-864_stg.jpg" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                
+                        <!-- Slide 2 -->
+                        <div class="swiper-slide">
+                            <a href="/homeProduct">
+                            <div class="row align-items-center slider-animated-2">
+                                <!-- Similar structure for the second image -->
+                                <div class="col-lg-12">
+                                    <div class="single-slider-img single-slider-img-1" style="width: 1325px; height: 400px;">
+                                        <img class="animated slider-1-1 w-100" src="/user/assets/imgs/banner/pc_2160-864_gp.jpg" alt="">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-7 col-md-6">
-                                <div class="single-slider-img single-slider-img-1">
-                                    <img class="animated slider-1-1" src="\user\assets\imgs\banner\smart.jpg" alt="">
+                        </a>
+                        </div>
+                
+                        <!-- Slide 3 -->
+                        
+                        <div class="swiper-slide">
+                            <a href="/homeProduct">
+                            <div class="row align-items-center slider-animated-3">
+                                <!-- Similar structure for the third image -->
+                                <div class="col-lg-12">
+                                    <div class="single-slider-img single-slider-img-1" style="width: 1325px; height: 400px;">
+                                        <img class="animated slider-1-1 w-100" src="/user/assets/imgs/banner/pc_2160-864_gd2.jpg" alt="">
+                                    </div>
                                 </div>
                             </div>
+                        </a>
                         </div>
                     </div>
-                </div>
-                
-                
-            </div>
-            <div class="slider-arrow hero-slider-1-arrow"></div>
-        </section>
-        <section class="featured section-padding position-relative">            
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
-                        <div class="banner-features wow fadeIn animated hover-up">
-                            <img src="/user/assets/imgs/theme/icons/feature-1.png" alt="">
-                            <h4 class="bg-1">Free Shipping</h4>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
-                        <div class="banner-features wow fadeIn animated hover-up">
-                            <img src="/user/assets/imgs/theme/icons/feature-2.png" alt="">
-                            <h4 class="bg-3">Online Order</h4>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
-                        <div class="banner-features wow fadeIn animated hover-up">
-                            <img src="/user/assets/imgs/theme/icons/feature-3.png" alt="">
-                            <h4 class="bg-2">Save Money</h4>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
-                        <div class="banner-features wow fadeIn animated hover-up">
-                            <img src="/user/assets/imgs/theme/icons/feature-4.png" alt="">
-                            <h4 class="bg-4">Promotions</h4>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
-                        <div class="banner-features wow fadeIn animated hover-up">
-                            <img src="/user/assets/imgs/theme/icons/feature-5.png" alt="">
-                            <h4 class="bg-5">Happy Sell</h4>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
-                        <div class="banner-features wow fadeIn animated hover-up">
-                            <img src="/user/assets/imgs/theme/icons/feature-6.png" alt="">
-                            <h4 class="bg-6">24/7 Support</h4>
-                        </div>
-                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+   
+</section>
+
+        
+<section class="featured section-padding position-relative text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
+                
+                    <img src="/user/assets/imgs/blog/GUESS_2820bc46-49df-440b-a6d3-72171b5480a9.avif" alt="Free Shipping Image" class="w-100">
+                
+            </div>
+            <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
+                
+                    <img src="/user/assets/imgs/blog/TED-BAKER_5bf11e4f-6085-4c02-9c8a-ecd7044efca12.avif" alt="Online Order Image" class="w-100">
+                
+            </div>
+            <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
+                
+                    <img src="/user/assets/imgs/blog/GC_9125085d-c035-4e2c-a9e0-941091665fed.avif" alt="Save Money Image" class="w-100">
+                
+            </div>
+            <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
+                
+                    <img src="/user/assets/imgs/blog/UCB_0c330737-2ba1-4849-ae8e-08ce4d9a5cf3.avif" alt="Promotions Image" class="w-100">
+               
+            </div>
+            <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
+                
+                    <img src="/user/assets/imgs/blog/VERSACE_b8e18091-56f4-4778-a7cb-feefc4d00ec1.avif" alt="Happy Sell Image" class="w-100">
+               
+            </div>
+            <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
+               
+                    <img src="/user/assets/imgs/blog/DW_c906768d-592d-4b6f-ad0a-4b7a1161792c.avif" alt="24/7 Support Image" class="w-100">
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
         <section class="product-tabs section-padding position-relative wow fadeIn animated">
             <div class="bg-square"></div>
             <div class="container">
                 <div class="tab-header">
+                    
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <!-- <li class="nav-item" role="presentation"> -->
 
-                            <li class="nav-item" role="presentation"></li>
+                            <!-- <li class="nav-item" role="presentation"></li>
                                 <button class="nav-link active bg-dark text-white" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one" aria-selected="true">All Products</button>
-                                </li>
+                                </li> -->
 
                             
-                                <li class="nav-item" role="presentation"></li>
-                                <button class="nav-link active bg-dark text-white" id="nav-tab-one"   type="button"  ><a href="/categoryPage" class="text-white">Categories</button>
-                                </li>
+                                <!-- <li class="nav-item" role="presentation"></li>
+                                <button class="nav-link active bg-dark text-white" id="nav-tab-one"   type="button"  ><a href="/homeProduct" class="text-white" >POPULAR PRODUCTS</button>
+                            </li>
+                             -->
+                             
+                             <li class="nav-item" role="presentation"></li>
+                             
+                             <button class="nav-link active bg-dark text-white" id="nav-tab-one">
+                                <a href="#" class="text-white">LATEST <span style="color: #e44d26;">PRODUCTS</span></a>
+                            </button>
+                            </li>
                             
 
                             
@@ -93,12 +232,7 @@
                         
 
 
-                        <!-- <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Popular</button>
-                        </li> -->
-                        <!-- <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">New added</button>
-                        </li> -->
+                       
                     </ul>
                    
                 </div>
@@ -111,47 +245,74 @@
                         <div class="row product-grid-4">
                             <%  products.forEach(product=>{  %>
                         <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                            <div class="product-cart-wrap mb-30">
+                            <div class="product-cart-wrap mb-30 border border-dark">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
                                         <a href="/productdetails/<%= product._id %>">
-                                            <img class="default-img" style="height: 300px;" src="<%=product.coverimage%>" alt="">
-                                            <img class="hover-img" style="height: 300px;" src="<%=product.coverimage%>" alt="">
+                                            <% if (product.quantity > 0) { %>
+                                                <img class="default-img" style="height: 300px;" src="<%=product.coverimage%>" alt="">
+                                                <% } else { %>
+                                                   <div style="position: relative; height: 300px; display: flex; justify-content: center; align-items:center ;">
+                                                    <div style="z-index: 50000; width: 100%;position: absolute;color: rgb(255, 255, 255); padding-top: 15px;  height: 50px; background-color: rgba(39, 29, 29, 0.344);
+                                                    font-size: 17px; font-weight: 600; text-align: center;">Out Of Stock</div>
+                                                    <img class="default-img " style="height: 300px;   filter: grayscale(100%);
+                                                    " src="<%=product.coverimage%>" alt="">
+                                                    
+                                                   </div>
+                                            <% } %>
+                                            <!-- <img class="hover-img" style="height: 300px;" src="<%=product.coverimage%>" alt=""> -->
                                         </a>
                                     </div>
                                     <div class="product-action-1">
-                                        <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                       
                                         <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                       
                                     </div>
                                     
                                 </div>
-                                <div class="product-content-wrap">
+                                <div class="product-content-wrap bg-light">
                                     <div class="product-category">
                                         <a href=""><%=product.category%></a>
                                     </div>
-                                    <h2><a href="/productdetails/<%= product._id %>"><%=product.name%></a></h2>
+                                    <h2><a href="/productdetails/<%= product._id %>" class="text-dark"><%=product.name%></a></h2>
                                     <div class="rating-result" title="90%">
                                         <span>
                                             <span>90%</span>
                                         </span>
                                     </div>
                                     <div class="product-price">
-                                        <span>₹<%=product.price%> </span>
-                                        <span class="old-price">₹<%=product.price%></span>
+                                        <span class="text-dark">₹ <%=product.offerPrice%> </span>
+                                        <span class="old-price"><%=product.price%></span>
                                     </div>
                                     <div class="product-action-1 show">
-                                        <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                        <!-- <a aria-label="Add To Cart" class="action-btn hover-up" href="shop-cart.html"><i class="fi-rs-shopping-bag-add"></i></a> -->
+
+                                        <div class="product-action-1 show">
+                                          
+                                            <% if (product.quantity > 0) { %>
+                                                <a aria-label="Add To Cart" class="action-btn hover-up" onclick="addToCart('<%= product.id %>',event)" href=""><i class="fi-rs-shopping-bag-add"></i></a>
+                                               
+                                                    
+                                            <% } %>
+                                            
+                               </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <% }) %>
+
+                        <li class="nav-item" role="presentation"></li>
+                                <button class="nav-link active bg-dark text-white" id="nav-tab-one"   type="button"  ><a href="/homeProduct" class="text-white" >SEE  MORE  PRODUCTS</button>
+                            </li>
                     </div>
 
                         <!--End product-grid-4-->
                     </div>
                     <!--En tab one (Featured)-->
+
+
                     <div class="tab-pane fade" id="tab-two" role="tabpanel" aria-labelledby="tab-two">
                         <div class="row product-grid-4">
                             <div class="col-lg-3 col-md-4 col-12 col-sm-6">
@@ -457,6 +618,8 @@
                         </div>
                         <!--End product-grid-4-->
                     </div>
+
+
                     <!--En tab two (Popular)-->
                     <div class="tab-pane fade" id="tab-three" role="tabpanel" aria-labelledby="tab-three">
                         <div class="row product-grid-4">
@@ -771,17 +934,16 @@
         <section class="banner-2 section-padding pb-0">
             <div class="container">
                 <div class="banner-img banner-big wow fadeIn animated f-none">
-                    <img src="/user/assets/imgs/banner/banner-4.png" alt="">
+                    <img src="/public/user/assets/imgs/banner/" alt="">
                     <div class="banner-text d-md-block d-none">
-                        <h4 class="mb-15 mt-40 text-brand">Repair Services</h4>
-                        <h1 class="fw-600 mb-20">We're an Apple <br>Authorised Service Provider</h1>
-                        <a href="shop-grid-right.html" class="btn">Learn More <i class="fi-rs-arrow-right"></i></a>
+                       
                     </div>
                 </div>
             </div>
         </section>
        
        
+
        
         
         
@@ -790,27 +952,31 @@
        
     </main>
     <footer class="main">
-        <section class="newsletter p-30 text-white wow fadeIn animated">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-7 mb-md-3 mb-lg-0">
+        <section class="newsletter p-0 text-white wow fadeIn animated">
+            <div class="video-container">
+                <video autoplay loop muted playsinline>
+                    <source src="https://player.vimeo.com/external/336751183.sd.mp4?s=632666cba3e4b82b369ec0182b1bcc866ae8d7e0&profile_id=164&oauth2_token_id=57447761" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="content-container">
+                    <div class="container">
                         <div class="row align-items-center">
-                            <div class="col flex-horizontal-center">
-                                <img class="icon-email" src="/user/assets/imgs/theme/icons/icon-email.svg" alt="">
-                                <h4 class="font-size-20 mb-0 ml-3">Sign up to Newsletter</h4>
+                            <div class="col-lg-7 mb-md-3 mb-lg-0">
+                                <div class="row align-items-center">
+                                   
+                                    <div class="col my-4 my-md-0 des">
+                                        <!-- You can add additional description here if needed -->
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col my-4 my-md-0 des">
-                                <h5 class="font-size-15 ml-4 mb-0">...and receive <strong>$25 coupon for first shopping.</strong></h5>
+                            <div class="col-lg-5">
+                                <!-- Subscribe Form -->
+                                <form class="form-subscriber d-flex subscribe-form">
+                                    
+                                </form>
+                                <!-- End Subscribe Form -->
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <!-- Subscribe Form -->
-                        <form class="form-subcriber d-flex wow fadeIn animated">
-                            <input type="email" class="form-control bg-white font-small" placeholder="Enter your email">
-                            <button class="btn bg-dark text-white" type="submit">Subscribe</button>
-                        </form>
-                        <!-- End Subscribe Form -->
                     </div>
                 </div>
             </div>
@@ -821,7 +987,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
                             <div class="logo logo-width-1 wow fadeIn animated">
-                                <a href="index.html"><img src="/user/assets/imgs/theme/logo.svg" alt="logo"></a>
+                                <h2><a href="/home" class="text-dark">Watch<span style="color: #e44d26;">Vogue</span></a></h2>
                             </div>
                             <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
                             <p class="wow fadeIn animated">
@@ -939,6 +1105,66 @@
     <!-- Template  JS -->
     <script src=".//user/assets/js/main.js?v=3.4"></script>
     <script src=".//user/assets/js/shop.js?v=3.4"></script>
+
+    <script>
+       
+       function addToCart(id, event) {
+    // Prevent the default behavior of the anchor element
+    event.preventDefault();
+
+    $.ajax({
+        url: `/addToCart?id=${id}`,
+        method: "get",
+        success: (response) => {
+            if (response.status) {
+                Swal.fire({
+                    title: 'ADD TO CART',
+                    text: 'Product Added to cart',
+                    icon: 'success',
+                    timer: 1000,
+                    showConfirmButton: false,
+                });
+            } else {
+                Swal.fire({
+    title: 'Login Required',
+    text: 'Please log in to add products to your cart.',
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonText: 'Login',
+    cancelButtonText: 'Cancel',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Redirect to your login route
+      window.location.href = '/login'; 
+    } else {
+      // Handle the case when the user clicks "Cancel" if needed
+      console.log('User canceled login');
+    }
+  });
+            }
+        },
+        error: (error) => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again');
+        }
+    });
+}
+
+ 
+   </script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        autoplay: {
+            delay: 3000,
+        },
+    });
+</script>
 
    
 </body>

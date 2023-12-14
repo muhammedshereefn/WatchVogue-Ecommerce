@@ -1853,8 +1853,9 @@ label {
 }
 
 .dot-style-1 ul li.slick-active button {
-  background: #088178;
+  background: #000000;
   border-color: #088178;
+  display: none;
 }
 
 .dot-style-1.dot-style-1-position-1 ul {
