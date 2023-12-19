@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://127.0.0.1:27017/usr_management_system");
+mongoose.connect("mongodb+srv://shereef123:shereef123@mycluster.ekbvehs.mongodb.net/watchvogue");
 
 //------------Express importing-------------------
 const express = require("express");
@@ -14,9 +14,12 @@ const adminRouter = require("./routes/adminRouter");
 app.use("/", userRouter);
 app.use("/admin", adminRouter);
 
+app.set("view engine", "ejs");
+app.set("views", "./views/users");
+
 // 404 handler for the entire application
 app.use((req, res) => {
-  res.status(404).send("404 Not Found");
+  res.status(404).render("404"); 
 });
 
 

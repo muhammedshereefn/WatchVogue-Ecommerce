@@ -11,6 +11,7 @@ const mongoose = require("mongoose");
 const Razorpay = require("razorpay");
 var easyinvoice = require("easyinvoice");
 const { Readable } = require("stream");
+const bcrypt = require('bcryptjs')
 
 const loadRegister = async (req, res) => {
   try {
@@ -37,11 +38,13 @@ const insertUser = async (req, res) => {
       }
 
       const referralCode = generateRandomReferralCode();
+      
+      const hashed = await bcrypt.hash(req.body.password,10)
 
       const user = new User({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password,
+        password: hashed,
         mobile: req.body.mobile,
         referalCode: referralCode,
       });
@@ -173,13 +176,13 @@ const verfiyUser = async (req, res) => {
 
     const userData = await User.findOne({ email: email });
     if (userData) {
-      if (userData.password === password) {
+      if (await bcrypt.compare(password,userData.password)) {
         if (userData.isBlocked === false) {
           req.session.user_id = userData._id;
           res.redirect("/home");
         } else {
-          console.log("prashnm ind");
-          res.redirect("/login");
+            // User is blocked
+            res.render("login", { message: "User is blocked. Please contact support for assistance." });
         }
       } else {
         res.render("login", { message: "Invalid email or password" });
@@ -1136,9 +1139,10 @@ const verifyForgotOTP = async (req, res) => {
 const addNewPassword = async (req, res) => {
   try {
     const password = req.body.password;
+    const hashed = await bcrypt.hash(password,10)
     const user = await User.findOne({ email: req.session.forgotReqEmail });
     await User.findByIdAndUpdate(user._id, {
-      password,
+      password:hashed,
     });
     res.send({
       sucess: true,
