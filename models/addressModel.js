@@ -38,6 +38,10 @@ const addressModel = new mongoose.Schema({
     type: String,
     required: true,
   },
+  phoneNumber:{
+    type:Number,
+    required: true,
+  }
 });
 
 const Address = mongoose.model("Address", addressModel);

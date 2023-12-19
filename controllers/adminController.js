@@ -638,25 +638,35 @@ const loadEditProduct = async (req, res) => {
 
 const editProduct = async (req, res) => {
   try {
-    const products = await Product.findByIdAndUpdate(req.body.id, {
-      $set: {
-        name: req.body.name,
-        description: req.body.description,
-        price: req.body.price,
-        category: req.body.category,
-        brand: req.body.brand,
-        quantity: req.body.quantity,
-        coverimage: req.body.coverimage,
-        images: req.body.images,
-      },
-    });
+    const { id, name, description, price, category, brand, quantity, coverimage, images } = req.body;
+
+    // Find the product by ID
+    const product = await Product.findById(id);
+
+    // Update the product fields
+    product.name = name;
+    product.description = description;
+    product.price = price;
+    product.category = category;
+    product.brand = brand;
+    product.quantity = quantity;
+   
+   
+
+    // Check if the product has an offer field, and update it with the product's price
+    if (product.offerPrice !== undefined) {
+      product.offerPrice = price;
+    }
+
+    // Save the updated product
+    await product.save();
+
     res.redirect("/admin/productList");
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal Server Error");
   }
 };
-
 const productUnlist = async (req, res) => {
   try {
     const productId = req.query.id;
@@ -1285,6 +1295,28 @@ const deleteCoupon = async (req, res) => {
   }
 };
 
+
+
+const deleteImage = async (req, res) => {
+  try {
+    console.log("Ethii");
+      const productId = req.params.id;
+      const imageUrlToDelete = req.body.imageUrl;
+
+      // Find the product by ID and update the images array
+      const product = await Product.findByIdAndUpdate(
+          productId,
+          { $pull: { images: imageUrlToDelete } },
+          { new: true } // To get the updated document
+      );
+
+      res.status(200).json({ success: true, updatedImages: product.images });
+  } catch (error) {
+      console.error('Error deleting image:', error);
+      res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+};
+
 module.exports = {
   loadLogin,
   verifyAdmin,
@@ -1332,4 +1364,5 @@ module.exports = {
   validateCoupon,
   loadEditCoupon,
   deleteCoupon,
+  deleteImage
 };

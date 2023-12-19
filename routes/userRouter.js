@@ -87,6 +87,11 @@ userRouter.get(
   userController.cartQuantityDec
 );
 
+userRouter.put(
+  "/updateQuantity/:id",
+  auth.isLogin,
+  userController.cartQuantityUpdate 
+);
 //------------------------------CHECKOUTPAGE-------------------------------------------------
 
 

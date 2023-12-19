@@ -8,13 +8,18 @@ const puppeteer = require('puppeteer');
 
 app.use(express.static("public"));
 
-//------------user-----------------
-
 const userRouter = require("./routes/userRouter");
-app.use("/", userRouter);
-
-// -----------admin-------------
 const adminRouter = require("./routes/adminRouter");
+
+app.use("/", userRouter);
 app.use("/admin", adminRouter);
+
+// 404 handler for the entire application
+app.use((req, res) => {
+  res.status(404).send("404 Not Found");
+});
+
+
+
 
 app.listen(7000, () => console.log("Server running...7000"));

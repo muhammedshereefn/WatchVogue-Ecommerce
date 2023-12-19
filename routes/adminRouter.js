@@ -176,8 +176,7 @@ adminRouter.get("/editcoupon", auth.isLogin, adminController.loadEditCoupon);
 adminRouter.get("/deleteCoupon", auth.isLogin, adminController.deleteCoupon);
 
 
-
-
+adminRouter.post('/admin/deleteImage/:id', adminController.deleteImage);
 
 //-----------------------------END--------------------------------------------------
 

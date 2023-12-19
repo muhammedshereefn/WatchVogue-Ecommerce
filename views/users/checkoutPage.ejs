@@ -43,7 +43,7 @@
                                                     <%= address[i].addressType %> <%= address[i].houseNo %> <%= address[i].street %><br />
                                                     <%= address[i].landmark ? address[i].landmark : '' %>
                                                     <%= address[i].city %>, <%= address[i].state %> <%= address[i].pincode %> <%= address[i].country %><br />
-                                                    Phone: <%= address[i].phone %>
+                                                    Phone: <%= address[i].phoneNumber %>
                                                 </address>
                                                 <p><%= address[i].district %></p>
                                                 <div class="row">
@@ -70,6 +70,7 @@
                                         <thead class="bg-dark text-white">
                                             <tr>
                                                 <th colspan="2">Product</th>
+                                                <th>Product Price</th>
                                                 <th>Total</th>
                                             </tr>
                                         </thead>
@@ -83,6 +84,7 @@
                                                         <h5><a href="<%= 'shop-product-full.html' %>"><%= product.product.name %></a></h5>
                                                         <span class="product-qty">x <%= product.quantity %></span>
                                                     </td>
+                                                    <td>Price : <%= product.product.offerPrice %></td>
                                                     <td>₹<%= product.product.offerPrice * product.quantity %></td>
                                                 </tr>
                                             <% }); %>
@@ -242,11 +244,7 @@
             <div class="row">
               <div class="col-lg-4 col-md-6">
                 <div class="widget-about font-md mb-md-5 mb-lg-0">
-                  <div class="logo logo-width-1 wow fadeIn animated">
-                    <a href="index.html"
-                      ><img src="/user/assets/imgs/theme/logo.svg" alt="logo"
-                    /></a>
-                  </div>
+                       
                   <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">
                     Contact
                   </h5>

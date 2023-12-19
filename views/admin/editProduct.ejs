@@ -1,5 +1,19 @@
 <%- include ('adminHeader')%>
 
+<style>
+    .existing-images {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.existing-image {
+    width: 100px; /* Adjust the width according to your design */
+    height: 100px; /* Adjust the height according to your design */
+    margin-right: 10px; /* Adjust the margin according to your design */
+    margin-bottom: 10px; /* Adjust the margin according to your design */
+}
+</style>
+
 
 <section class="content-main">
     <form action="/admin/editproduct" method="post" enctype="multipart/form-data">
@@ -42,20 +56,19 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="card mb-4">
+                <div class="card mb-4">
                     <div class="card-body">
-                        <div>
-                            <label class="form-label">Cover Images</label>
-                            <input type="file"  accept="image/*" id="images" name="coverimage" multiple>
+                        <label class="form-label">Existing Images</label>
+                        <div class="existing-images">
+                            <% products.images.forEach(image => { %>
+                                <div class="existing-image-container">
+                                    <img src="<%= image %>" alt="Product Image" class="img-thumbnail existing-image">
+                                    <button type="button" class="btn btn-sm btn-danger delete-image-btn" data-image="<%= image %>">Delete</button>
+                                </div>
+                            <% }) %>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div>
-                            <label class="form-label">Images</label>
-                            <input name="images" class="form-control" type="file" multiple required>
-                        </div>
-                    </div>
-                </div> -->
+                </div>
             </div>
       
 
@@ -84,5 +97,39 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', () => {
+                                        const deleteImageButtons = document.querySelectorAll('.delete-image-btn');
+                                
+                                        deleteImageButtons.forEach(button => {
+                                            button.addEventListener('click', async () => {
+                                                const imageUrlToDelete = button.getAttribute('data-image');
+                                                const productId = '<%= products._id %>'; // Replace with your actual product ID
+                                                alert("click")
+                                                try {
+                                                    const response = await fetch(`admin/deleteImage/${productId}`, {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/json',
+                                                        },
+                                                        body: JSON.stringify({ imageUrl: imageUrlToDelete }),
+                                                    });
+                                
+                                                    if (response.ok) {
+                                                        alert("OKK")
+                                                        // Reload the page or update the existing images display
+                                                        location.reload(); // You can implement a better way to update the UI without a page reload
+                                                    } else {
+                                                        console.error('Failed to delete image');
+                                                    }
+                                                } catch (error) {
+                                                    console.error('Error deleting image:', error);
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
                       
-    <%- include ('adminFooter')%>   
+    <%- include ('adminFooter')%>    

@@ -82,7 +82,7 @@
                                         </span>
                                     </div>
                                     <div class="product-price">
-                                        <span>₹ <%=product.offerPrice%> </span>
+                                        <span class="text-dark">₹ <%=product.offerPrice%> </span>
                                         <span class="old-price"><%=product.price%></span>
                                     </div>
                                     <div class="product-action-1 show">
@@ -110,7 +110,7 @@
                           <ul class="pagination justify-content-start">
                             <% for (let i = 1; i <= totalPages; i++) { %>
                               <li class="page-item <%= i == currentPage ? 'active' : '' %>">
-                                <a class="page-link" href="?page=<%= i %>&category=<%= categoryFilter %>"><%= i %></a>
+                                <a class="page-link bg-dark" href="?page=<%= i %>&category=<%= categoryFilter %>"><%= i %></a>
                               </li>
                             <% } %>
                           </ul>
@@ -908,7 +908,16 @@
                     showConfirmButton: false,
                 });
             } else {
-                alert('Error: ' + response.message);
+                Swal.fire({
+                  title: 'Product Already in Cart',
+                  text: 'This product is already in your cart.',
+                  icon: 'info',
+                  confirmButtonText: 'View Cart',
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    window.location.href = '/cart';
+                  }
+                });
             }
         },
         error: (error) => {

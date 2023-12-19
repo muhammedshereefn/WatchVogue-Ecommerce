@@ -1107,51 +1107,56 @@
     <script src=".//user/assets/js/shop.js?v=3.4"></script>
 
     <script>
-       
-       function addToCart(id, event) {
-    // Prevent the default behavior of the anchor element
-    event.preventDefault();
-
-    $.ajax({
-        url: `/addToCart?id=${id}`,
-        method: "get",
-        success: (response) => {
-            if (response.status) {
+        function addToCart(id, event) {
+          event.preventDefault();
+      
+          $.ajax({
+            url: `/addToCart?id=${id}`,
+            method: "get",
+            success: (response) => {
+              if (response.status) {
                 Swal.fire({
-                    title: 'ADD TO CART',
-                    text: 'Product Added to cart',
-                    icon: 'success',
-                    timer: 1000,
-                    showConfirmButton: false,
+                  title: 'ADD TO CART',
+                  text: 'Product Added to cart',
+                  icon: 'success',
+                  timer: 1000,
+                  showConfirmButton: false,
                 });
-            } else {
+              } else if (response.alreadyInCart) {
                 Swal.fire({
-    title: 'Login Required',
-    text: 'Please log in to add products to your cart.',
-    icon: 'info',
-    showCancelButton: true,
-    confirmButtonText: 'Login',
-    cancelButtonText: 'Cancel',
-  }).then((result) => {
-    if (result.isConfirmed) {
-      // Redirect to your login route
-      window.location.href = '/login'; 
-    } else {
-      // Handle the case when the user clicks "Cancel" if needed
-      console.log('User canceled login');
-    }
-  });
+                  title: 'Product Already in Cart',
+                  text: 'This product is already in your cart.',
+                  icon: 'info',
+                  confirmButtonText: 'View Cart',
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    window.location.href = '/cart';
+                  }
+                });
+              } else {
+                Swal.fire({
+                  title: 'Login Required',
+                  text: 'Please log in to add products to your cart.',
+                  icon: 'info',
+                  showCancelButton: true,
+                  confirmButtonText: 'Login',
+                  cancelButtonText: 'Cancel',
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    window.location.href = '/login';
+                  } else {
+                    console.log('User canceled login');
+                  }
+                });
+              }
+            },
+            error: (error) => {
+              console.error('Error:', error);
+              alert('An error occurred. Please try again');
             }
-        },
-        error: (error) => {
-            console.error('Error:', error);
-            alert('An error occurred. Please try again');
+          });
         }
-    });
-}
-
- 
-   </script>
+      </script>
 <script>
     var swiper = new Swiper('.swiper-container', {
         slidesPerView: 1,

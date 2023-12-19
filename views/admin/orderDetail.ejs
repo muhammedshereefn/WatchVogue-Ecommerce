@@ -61,12 +61,12 @@
                                 <div class="text">
                                     <h6 class="mb-1">Deliver to</h6>
                                     <p class="mb-1">
-                                        <%= order.user.addresses[0].houseNo %> <%= order.user.addresses[0].street %><br>
-                                        <%= order.user.addresses[0].landmark ? `${order.user.addresses[0].landmark},` : '' %>
-                                        <%= order.user.addresses[0].city %>, <%= order.user.addresses[0].district %>, <%= order.user.addresses[0].state %>, <%= order.user.addresses[0].country %><br>
-                                        Pincode: <%= order.user.addresses[0].pincode %>
+                                        <%= order.address[0].houseNo %> <%= order.address[0].street %><br>
+                                        <%= order.address[0].landmark ? `${order.address[0].landmark},` : '' %>
+                                        <%= order.address[0].city %>, <%= order.address[0].district %>, <%= order.address[0].state %>, <%= order.address[0].country %><br>
+                                        Pincode: <%= order.address[0].pincode %>
                                     </p>
-                                    
+                                    <a href="/profile">View profile</a>
                                 </div>
                             </article>
                         </div> <!-- col// -->

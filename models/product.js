@@ -25,7 +25,7 @@ const productModel = new mongoose.Schema(
     },
     brand: {
       type: String,
-    },
+    },  
     isFeature: {
       type: Boolean,
       default: false,

@@ -326,6 +326,7 @@ const addressAdding = async (req, res) => {
       district,
       state,
       country,
+      phoneNumber
     } = req.body;
 
     // Assuming you have a User model with an "addresses" field
@@ -342,6 +343,7 @@ const addressAdding = async (req, res) => {
       district,
       state,
       country,
+      phoneNumber
     });
     await user.save();
 
@@ -422,6 +424,7 @@ const editingAddress = async (req, res) => {
     addressToEdit.district = req.body.district;
     addressToEdit.state = req.body.state;
     addressToEdit.country = req.body.country;
+    addressToEdit.phoneNumber = req.body.phoneNumber;
 
     // Save the updated user object
     await user.save();
@@ -482,7 +485,10 @@ const loadCartPage = async (req, res) => {
       "items.product"
     );
 
+    
+
     if (cart) {
+      
       cart.items = cart.items.filter((item) => item.product !== null);
       await cart.save();
     }
@@ -495,22 +501,19 @@ const loadCartPage = async (req, res) => {
     console.log(error);
   }
 };
-
 const addToCart = async (req, res) => {
   try {
     const { id } = req.query;
-
     const user = req.session.user_id;
-
     const cart = await Cart.findOne({ user: user });
-
     const product = await Product.findById(id);
 
     if (!product) {
       res.status(404).json({ message: "Product not Found" });
+      return;
     }
+
     if (cart === null) {
-      console.log("found cart nulll === ", new mongoose.Types.ObjectId(id));
       await Cart.insertMany({
         user: user,
         items: [
@@ -524,17 +527,24 @@ const addToCart = async (req, res) => {
       const cartItem = cart.items.find((item) => item?.product + "" === id);
 
       if (cartItem) {
-        cartItem.quantity += 1;
+        // Product is already in the cart, show a different message
+        res.status(200).json({
+          message: "Product is already in the cart",
+          status: false,
+          alreadyInCart: true,
+        });
+        return;
       } else {
-        cart.items.push({ product: id });
+        cart.items.push({ product: id, quantity: 1 });
       }
 
       await cart.save();
     }
 
-    res.status(200).json({ message: "Product add to the Cart", status: true });
+    res.status(200).json({ message: "Product added to the Cart", status: true });
   } catch (error) {
     console.log(error);
+    res.status(500).json({ message: "Internal Server Error", status: false });
   }
 };
 
@@ -728,6 +738,7 @@ const checkoutEditingAddress = async (req, res) => {
     addressToEdit.district = req.body.district;
     addressToEdit.state = req.body.state;
     addressToEdit.country = req.body.country;
+    addressToEdit.phoneNumber = req.body.phoneNumber;
 
     // Save the updated user object
     await user.save();
@@ -764,6 +775,7 @@ const checkoutaddressAdding = async (req, res) => {
       district,
       state,
       country,
+      phoneNumber
     } = req.body;
 
     // Assuming you have a User model with an "addresses" field
@@ -780,6 +792,7 @@ const checkoutaddressAdding = async (req, res) => {
       district,
       state,
       country,
+      phoneNumber
     });
     await user.save();
 
@@ -799,7 +812,7 @@ const razorpay = new Razorpay({
 const placeOrder = async (req, res) => {
   const { selectedAddressId, paymentMethod, total, couponCode } = req.body;
   console.log("Payment Method:", paymentMethod);
-
+console.log(selectedAddressId);
   try {
     if (paymentMethod === "cod") {
       // Handle Cash On Delivery (cod) logic
@@ -807,15 +820,22 @@ const placeOrder = async (req, res) => {
       const cartItems = await Cart.findOne({ user: req.session.user_id });
 
       for (let element of cartItems.items) {
-        products.push({ product: element.product, quantity: element.quantity });
+        products.push({ product: element.product, quantity: element.quantity  });
         const product = await Product.findOne({ _id: element.product });
         let quantity = product.quantity - element.quantity;
         await Product.findByIdAndUpdate(product._id, { quantity });
       }
+      const address = await User.findOne({_id:req.session.user_id});
+      console.log(address);
+      let Address = address.addresses;
+      console.log(Address);
+
+      // const address = await Address.findOne({_id:selectedAddressId})
+      // console.log(address);
 
       const order = new Order({
         user: req.session.user_id,
-        address: selectedAddressId,
+        address:Address,
         paymentMethod,
         products,
         grandTotal: total,
@@ -867,11 +887,16 @@ const placeOrder = async (req, res) => {
           .json({ status: false, message: "Insufficient wallet balance" });
       }
 
+      const address = await User.findOne({_id:req.session.user_id});
+      console.log(address);
+      let Address = address.addresses;
+      console.log(Address);
+
       const cart = await Cart.findOne({ user: userId });
 
       const orderData = {
         user: userId,
-        address: selectedAddressId,
+        address:Address,
         products: products,
         paymentMethod: paymentMethod,
         grandTotal: total,
@@ -927,9 +952,14 @@ const placeOrderRaz = async (req, res) => {
       await Product.findByIdAndUpdate(product._id, { quantity });
     }
 
+    const address = await User.findOne({_id:req.session.user_id});
+      console.log(address);
+      let Address = address.addresses;
+      console.log(Address);
+
     const order = new Order({
       user: req.session.user_id,
-      address: selectedAddressId,
+      address:Address,
       paymentMethod,
       products,
       grandTotal: total,
@@ -1530,6 +1560,36 @@ const getreferal = async (req, res) => {
   }
 };
 
+
+const cartQuantityUpdate = async (req, res) => {
+  try {
+      const userId = req.session.user_id;
+      let cart = await Cart.findOne({ user: userId });
+      const itemIndex = cart.items.findIndex(
+          (item) => item.product.toString() === req.params.id
+      );
+
+      const product = await Product.findById(req.params.id);
+
+      const quantityChange = parseInt(req.query.change);
+
+      if (cart.items[itemIndex].quantity + quantityChange <= product.quantity && cart.items[itemIndex].quantity + quantityChange > 0) {
+          cart.items[itemIndex].quantity += quantityChange;
+          await cart.save();
+
+          const total = cart.items[itemIndex].quantity * product.offerPrice;
+          res.json({ success: true, quantity: cart.items[itemIndex].quantity, total });
+      } else {
+          res.status(400).json({ success: false, message: 'Invalid quantity change' });
+      }
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+};
+
+
+
 module.exports = {
   addNewPassword,
   verifyForgotOTP,
@@ -1580,4 +1640,5 @@ module.exports = {
   addWallet,
   updateWallet,
   getreferal,
+  cartQuantityUpdate 
 };

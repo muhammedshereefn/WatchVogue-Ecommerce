@@ -63,10 +63,12 @@
                         <div class="text">
                             <h6 class="mb-1">Deliver to</h6>
                             <p class="mb-1">
-                                <%= order.user.addresses[0].houseNo %> <%= order.user.addresses[0].street %><br>
-                                <%= order.user.addresses[0].landmark ? `${order.user.addresses[0].landmark},` : '' %>
-                                <%= order.user.addresses[0].city %>, <%= order.user.addresses[0].district %>, <%= order.user.addresses[0].state %>, <%= order.user.addresses[0].country %><br>
-                                Pincode: <%= order.user.addresses[0].pincode %>
+                                <%= order.address[0].houseNo %> <%= order.address[0].street %><br>
+                                <%= order.address[0].landmark ? `${order.address[0].landmark},` : '' %>
+                                <%= order.address[0].city %>, <%= order.address[0].district %>, <%= order.address[0].state %>, <%= order.address[0].country %><br>
+                                Pincode: <%= order.address[0].pincode %>
+                                <br>
+                                Phone: <%= order.address[0].phoneNumber %>
                             </p>
                             <a href="/profile">View profile</a>
                         </div>
@@ -81,9 +83,9 @@
                                 <tr>
                                    
                                     <th width="40%">Product</th>
-                                    <th width="20%">Unit Price</th>
+                                    <th width="20%">Brand</th>
                                     <th width="20%">Quantity</th>
-                                    <th width="20%" class="text-end">Total</th>
+                                    
                                     
                                     
                                 </tr>
@@ -105,9 +107,9 @@
                                         </a>
                                     </td>
 
-                                    <td>₹<%=  order.product.offerPrice  %></td>
+                                    <td><%=  order.product.brand %></td>
                                     <td> <%=  order.quantity  %></td>
-                                    <td class="text-end"> <%= order.product.offerPrice * order.quantity %> </td>
+                                   
                               
                                 </tr>
                                 <%  }) %>
@@ -117,7 +119,7 @@
                                           
                                             <br>
                                             <dl class="dlist">
-                                                <dt>Grand total:</dt>
+                                                <dt>Gross :</dt>
                                                 <dd> <b class="h5 bg-light">₹<%= order.grandTotal %></b>.00 </dd>
                                             </dl>
                                            
