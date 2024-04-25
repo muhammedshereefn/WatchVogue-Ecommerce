@@ -1,4 +1,4 @@
-
+ 
 # Welcome to WATCH VOGUE 🕰️
 
 **WATCH VOGUE** is a captivating e-commerce platform dedicated to providing a timeless and elegant shopping experience. This journey, fueled by passion and self-driven learning, has been truly remarkable.
@@ -55,3 +55,13 @@ To get started with the WatchVogue, follow these steps:
 
 ## Acknowledgments
 A heartfelt thank you to everyone who supported me throughout this journey. Your encouragement and assistance have been invaluable.
+
+
+## OUT
+
+![Screenshot (114)](https://github.com/muhammedshereefn/WatchVogue-Ecommerce/assets/126606666/d6847385-64d7-4414-97f7-cf6e6c6cc51f)
+![Screenshot (115)](https://github.com/muhammedshereefn/WatchVogue-Ecommerce/assets/126606666/b8a8016d-6d61-4c07-a1f3-54ae9c80a91c)
+
+![Screenshot (116)](https://github.com/muhammedshereefn/WatchVogue-Ecommerce/assets/126606666/d54a70b0-76bd-4dec-8174-5fc585697fe1)
+![Screenshot (117)](https://github.com/muhammedshereefn/WatchVogue-Ecommerce/assets/126606666/7af8a0b1-e994-4297-a182-8b0847c358c3)
+![Screenshot (118)](https://github.com/muhammedshereefn/WatchVogue-Ecommerce/assets/126606666/26eac31e-7cda-4140-9452-b955d2a22431)
