@@ -43,5 +43,15 @@
 ### Sales Graph
 - **Visualize Sales Data**: Gain insights with graphical representations of sales.
 
+
+## How to Use
+
+To get started with the WatchVogue, follow these steps:
+
+1. Clone the repository.
+2. Install dependencies using `npm install`.
+3. Run the application using `npm start`.
+
+
 ## Acknowledgments
 A heartfelt thank you to everyone who supported me throughout this journey. Your encouragement and assistance have been invaluable.
