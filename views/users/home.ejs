@@ -8,157 +8,41 @@
     }
 
     .featured img:hover {
-        transform: translateY(-10px); /* Move the image 10 pixels upwards */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adjust shadow properties as needed */
-        opacity: 0.8; /* Adjust the opacity value */
-    }
-</style>
-<style>
-    .newsletter {
-        position: relative;
-        background-color: #333;
-        color: white;
+        transform: translateY(-10px);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        opacity: 0.8;
     }
 
-    .video-container {
-        width: 100%;
-        height: 90px; /* Set the desired height */
+    .home-slider {
+        position: relative;
+        background-color: #f8f8f8;
         overflow: hidden;
     }
 
-    video {
+    .swiper-container {
         width: 100%;
-        height: 100%; /* Ensure the video fills the container */
-        object-fit: cover; /* Maintain aspect ratio and cover the container */
+        height: auto;
     }
 
-    .content-container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .subscribe-form {
-        display: flex;
-        align-items: center;
-    }
-
-    .watch-icon {
-        width: 40px; /* Adjust the size as needed */
-        height: 40px; /* Adjust the size as needed */
-        margin-right: 10px;
-        animation: rotateWatch 2s infinite linear;
-    }
-
-    @keyframes rotateWatch {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-    .form-control {
+    .swiper-slide img {
         width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #fff;
-        border-radius: 5px;
-        background-color: transparent;
-        color: #fff;
-        transition: border-color 0.3s ease-in-out;
+        height: auto;
+        object-fit: cover;
     }
 
-    .form-control:focus {
-        border-color: #ffcc00;
-        outline: none;
-    }
-
-    .subscribe-btn {
-        background-color: #ffcc00;
-        color: #333;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-    }
-
-    .subscribe-btn:hover {
-        background-color: #ffd633;
-        transform: scale(1.1);
-    }
-</style>
-
-<style>
-    .product-cart-wrap {
-        border: 1px solid #000; /* Add a border if needed */
-        /* Remove border-radius to have sharp edges */
-        border-radius: 0;
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .swiper-slide img {
+            display: none; /* Hide images on mobile devices */
+        }
     }
 </style>
 
 <!-- Swiper JS -->
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <main class="main">       
-      <section class="home-slider position-relative pt-15 bg-light">
-    <div class="hero-slider-1 dot-style-1 dot-style-1-position-1">
-        <div class="single-hero-slider single-animation-wrap">
-            <div class="container-fluid">
-                <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                        <!-- Slide 1 -->
-                        <div class="swiper-slide">
-                            <a href="/homeProduct">
-                                <div class="row align-items-center slider-animated-1">
-                                    <div class="col-lg-12">
-                                        <div class="single-slider-img single-slider-img-1" style="width: 1325px; height: 400px;">
-                                            <img class="animated slider-1-1 w-100" src="/user/assets/imgs/banner/pc_2160-864_stg.jpg" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                
-                        <!-- Slide 2 -->
-                        <div class="swiper-slide">
-                            <a href="/homeProduct">
-                            <div class="row align-items-center slider-animated-2">
-                                <!-- Similar structure for the second image -->
-                                <div class="col-lg-12">
-                                    <div class="single-slider-img single-slider-img-1" style="width: 1325px; height: 400px;">
-                                        <img class="animated slider-1-1 w-100" src="/user/assets/imgs/banner/pc_2160-864_gp.jpg" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        </div>
-                
-                        <!-- Slide 3 -->
-                        
-                        <div class="swiper-slide">
-                            <a href="/homeProduct">
-                            <div class="row align-items-center slider-animated-3">
-                                <!-- Similar structure for the third image -->
-                                <div class="col-lg-12">
-                                    <div class="single-slider-img single-slider-img-1" style="width: 1325px; height: 400px;">
-                                        <img class="animated slider-1-1 w-100" src="/user/assets/imgs/banner/pc_2160-864_gd2.jpg" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        </div>
-                    </div>
-                    <!-- Add Pagination -->
-                    <div class="swiper-pagination"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-   
-</section>
+
+
+<main class="main">
+  
 
         
 <section class="featured section-padding position-relative text-white">

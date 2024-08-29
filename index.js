@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://shereef123:shereef123@mycluster.ekbvehs.mongodb.net/watchvogue");
+mongoose.connect("mongodb+srv://shereef123:shereef123@mycluster.ekbvehs.mongodb.net/watchvogue").then(()=>{
+  console.log("Connected MongoDB")
+})
 
 //------------Express importing-------------------
 const express = require("express");
